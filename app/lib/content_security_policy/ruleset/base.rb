@@ -11,6 +11,10 @@ module ContentSecurityPolicy
       ].each do |method_name|
         define_method(method_name) { [] }
       end
+
+      def load?
+        true
+      end
     end
   end
 end
