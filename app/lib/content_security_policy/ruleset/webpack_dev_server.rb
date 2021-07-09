@@ -4,8 +4,9 @@ module ContentSecurityPolicy
   module Ruleset
     # Used in the Twitch player embed at the LIVE page.
     class WebpackDevServer < Base
-      def connect_src
-        [
+      def initialize(**attributes)
+        super
+        self.connect_src ||= [
           'http://localhost:3035',
           'ws://localhost:3035'
         ]

@@ -5,16 +5,11 @@ module ContentSecurityPolicy
     module Stripe
       # Used for loading Stripe's JS library.
       class Js
-        def connect_src
-          'https://api.stripe.com'
-        end
-
-        def frame_src
-          ['https://js.stripe.com', 'https://hooks.stripe.com']
-        end
-
-        def script_src
-          'https://js.stripe.com'
+        def initialize(**attributes)
+          super
+          self.connect_src ||= 'https://api.stripe.com'
+          self.frame_src   ||= ['https://js.stripe.com', 'https://hooks.stripe.com']
+          self.script_src  ||= 'https://js.stripe.com'
         end
       end
     end

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ContentSecurityPolicy::Builder do
+RSpec.describe ContentSecurityPolicy::Ruleset::Base do
   let(:base_ruleset) { described_class.new(**existing_rules) }
   let(:existing_rules) { {} }
   let(:new_rules) do
