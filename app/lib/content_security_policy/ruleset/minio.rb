@@ -8,6 +8,10 @@ module ContentSecurityPolicy
         'http://localhost:9000'
       end
 
+      def img_src
+        'http://localhost:9000'
+      end
+
       def load?
         Rails.env.development?
       end

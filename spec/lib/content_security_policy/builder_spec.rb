@@ -88,4 +88,38 @@ RSpec.describe ContentSecurityPolicy::Builder do
       it { is_expected.to have_attributes(target_ruleset_contents) }
     end
   end
+
+  describe '#to_actiondispatch_csp' do
+    subject { base_ruleset.to_actiondispatch_csp.instance_variable_get(:@directives) }
+
+    let(:existing_rules) do
+      {
+        base_uri: :self,
+        default_src: [:self, :https, :unsafe_eval, 'http://example.com'],
+        font_src: %i[self https data], # copes with a nil/empty attribute
+        img_src: [:self, :https, :data, 'http://example.com'],
+        object_src: :none,
+        script_src: [:strict_dynamic, :self, :https, :unsafe_inline, 'http://example.com'],
+        frame_src: 'http://example.com',
+        connect_src: [:self, :https, 'http://example.com'],
+        style_src: %i[self https unsafe_inline]
+      }
+    end
+
+    let(:expectation) do
+      {
+        'base-uri' => ["'self'"],
+        'default-src' => ["'self'", 'https:', "'unsafe-eval'", 'http://example.com'],
+        'font-src' => ["'self'", 'https:', 'data:'],
+        'img-src' => ["'self'", 'https:', 'data:', 'http://example.com'],
+        'object-src' => ["'none'"],
+        'script-src' => ["'strict-dynamic'", "'self'", 'https:', "'unsafe-inline'", 'http://example.com'],
+        'frame-src' => ['http://example.com'],
+        'connect-src' => ["'self'", 'https:', 'http://example.com'],
+        'style-src' => ["'self'", 'https:', "'unsafe-inline'"]
+      }
+    end
+
+    it { is_expected.to eq(expectation) }
+  end
 end

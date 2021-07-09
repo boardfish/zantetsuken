@@ -6,7 +6,7 @@ module ContentSecurityPolicy
     include ActiveModel::AttributeAssignment
 
     attr_accessor :base_uri, :default_src, :font_src, :img_src, :object_src, :script_src, :frame_src, :connect_src,
-                  :style_src
+                  :style_src, :report_uri
 
     def initialize(**attributes)
       assign_attributes(attributes)
@@ -22,6 +22,14 @@ module ContentSecurityPolicy
 
     def to_h
       instance_values.symbolize_keys
+    end
+
+    def to_actiondispatch_csp
+      ActionDispatch::ContentSecurityPolicy.new do |policy|
+        instance_values.each do |rule_name, attribute|
+          policy.public_send(rule_name, *attribute)
+        end
+      end
     end
   end
 end
