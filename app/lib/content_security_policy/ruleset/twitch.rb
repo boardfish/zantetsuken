@@ -5,6 +5,7 @@ module ContentSecurityPolicy
     # Used in the Twitch player embed at the LIVE page.
     class Twitch < Base
       def default_src
+        # TODO: don't include HTTPS in prod?
         ['http://player.twitch.tv', 'https://player.twitch.tv']
       end
 

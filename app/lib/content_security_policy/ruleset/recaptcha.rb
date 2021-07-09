@@ -10,6 +10,7 @@ module ContentSecurityPolicy
 
       def frame_src
         ['https://www.google.com/recaptcha/', 'https://recaptcha.google.com/recaptcha/']
+        # 'https://www.recaptcha.net'
       end
     end
   end
