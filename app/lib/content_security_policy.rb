@@ -4,7 +4,8 @@
 # browser when you visit Raise.dev.
 module ContentSecurityPolicy
   class << self
-    def load
+    def load(base_policy = ActionDispatch::ContentSecurityPolicy.new)
+      self::Ruleset.load(base_policy)
     end
   end
 end

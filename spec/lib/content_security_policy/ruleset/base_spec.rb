@@ -90,7 +90,11 @@ RSpec.describe ContentSecurityPolicy::Ruleset::Base do
   end
 
   describe '#to_actiondispatch_csp' do
-    subject { base_ruleset.to_actiondispatch_csp.instance_variable_get(:@directives) }
+    subject do
+      ActionDispatch::ContentSecurityPolicy.new do |policy|
+        base_ruleset.to_actiondispatch_csp(policy)
+      end.instance_variable_get(:@directives)
+    end
 
     let(:existing_rules) do
       {

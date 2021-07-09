@@ -2,8 +2,8 @@
 
 module ContentSecurityPolicy
   module Ruleset
-    # Displays forms that go straight to an internal database with a UI.
-    class Airtable < Base
+    # Displays forms.
+    class Typeform < Base
       def initialize(**attributes)
         super
         self.frame_src ||= [

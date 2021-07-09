@@ -1,40 +1,25 @@
 # frozen_string_literal: true
 
 module ContentSecurityPolicy
+  # Contains definitions for sets of rules that should be applied as part of the
+  # content security policy.
   module Ruleset
-    class Base
-      include ActiveModel::Attributes
-      include ActiveModel::AttributeAssignment
-
-      attr_accessor :base_uri, :default_src, :font_src, :img_src, :object_src, :script_src, :frame_src, :connect_src,
-                    :style_src, :report_uri
-
-      def initialize(**attributes)
-        assign_attributes(attributes)
+    class << self
+      def load(base_policy = ActionDispatch::ContentSecurityPolicy.new)
+        load_all_rulesets_in(self).to_actiondispatch_csp(base_policy)
       end
 
-      def add(ruleset)
-        tap do
-          assign_attributes(
-            to_h.merge(ruleset.to_h) { |_, existing_rules, new_rules| Array.wrap(existing_rules) | Array.wrap(new_rules) }
-          )
-        end
-      end
+      private
 
-      def to_h
-        instance_values.symbolize_keys
-      end
-
-      def to_actiondispatch_csp
-        ActionDispatch::ContentSecurityPolicy.new do |policy|
-          instance_values.each do |rule_name, attribute|
-            policy.public_send(rule_name, *attribute)
+      def load_all_rulesets_in(mod, base_policy = self::Base.new)
+        mod.constants(false).reduce(base_policy) do |policy, ruleset_class|
+          klass = mod.const_get(ruleset_class)
+          if klass <= Base
+            klass.new.load? ? policy.add(klass.new) : policy
+          else
+            load_all_rulesets_in(klass, policy)
           end
         end
-      end
-
-      def load?
-        true
       end
     end
   end

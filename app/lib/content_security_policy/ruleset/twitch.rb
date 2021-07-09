@@ -10,7 +10,7 @@ module ContentSecurityPolicy
         self.default_src ||= ['http://player.twitch.tv', 'https://player.twitch.tv']
         self.script_src ||= 'https://embed.twitch.tv'
         self.frame_src ||= ['https://player.twitch.tv',
-         'http://player.twitch.tv']
+                            'http://player.twitch.tv']
       end
     end
   end

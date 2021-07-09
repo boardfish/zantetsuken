@@ -3,6 +3,9 @@
 module ContentSecurityPolicy
   # A set of rules that comprises a Content Security Policy.
   module Ruleset
+    # Base class for rulesets. Defines the rules to be applied and the behavior
+    # for composing these rulesets into a single instance of
+    # ActionDispatch::ContentSecurityPolicy.
     class Base
       include ActiveModel::AttributeAssignment
 
@@ -16,7 +19,9 @@ module ContentSecurityPolicy
       def add(ruleset)
         tap do
           assign_attributes(
-            to_h.merge(ruleset.to_h) { |_, existing_rules, new_rules| Array.wrap(existing_rules) | Array.wrap(new_rules) }
+            to_h.merge(ruleset.to_h) do |_, existing_rules, new_rules|
+              Array.wrap(existing_rules) | Array.wrap(new_rules)
+            end
           )
         end
       end
@@ -25,11 +30,9 @@ module ContentSecurityPolicy
         instance_values.symbolize_keys
       end
 
-      def to_actiondispatch_csp
-        ActionDispatch::ContentSecurityPolicy.new do |policy|
-          instance_values.each do |rule_name, attribute|
-            policy.public_send(rule_name, *attribute)
-          end
+      def to_actiondispatch_csp(policy)
+        instance_values.each do |rule_name, attribute|
+          policy.public_send(rule_name, *attribute)
         end
       end
 
