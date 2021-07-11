@@ -8,6 +8,7 @@ require 'active_support/core_ext/object/instance_variables'
 require 'active_support/core_ext/array/wrap'
 require 'active_support/core_ext/string/inquiry'
 
+# Mock environment checks
 module Rails
   mattr_accessor :env, default: 'development'.inquiry
 end
