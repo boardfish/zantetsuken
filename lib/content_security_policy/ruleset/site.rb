@@ -4,7 +4,7 @@ module ContentSecurityPolicy
   module Ruleset
     # Used in the Twitch player embed at the LIVE page.
     class Site < Base
-      def initialize(**attributes) # rubocop:disable Metrics/CyclomaticComplexity
+      def initialize(**attributes)
         super
         self.base_uri    ||= [:self]
         self.default_src ||= %i[self https]
