@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['si@mon.fish']
 
   spec.summary       = "Organize and build your app's Content Security Policy"
-  spec.description   = 'The Content Security Policy (CSP) initializer in Rails can get cluttered fast. Break it down with the help of this gem.'
+  spec.description   = 'The Content Security Policy (CSP) in Rails can get cluttered fast. Break it down with this gem.'
   spec.homepage      = 'https://github.com/raisedevs/csp-builder'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.5.0')
@@ -27,9 +27,9 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'activemodel', '~> 6.1.4', '>= 6.0.0'
   spec.add_runtime_dependency 'actionpack', '~> 6.1.4', '>= 6.0.0'
+  spec.add_runtime_dependency 'activemodel', '~> 6.1.4', '>= 6.0.0'
   spec.add_development_dependency 'faker'
-  spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rubocop'
 end

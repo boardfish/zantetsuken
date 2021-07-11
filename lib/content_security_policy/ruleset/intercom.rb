@@ -6,12 +6,12 @@ module ContentSecurityPolicy
     class Intercom < Base
       def initialize(**attributes)
         super
-        self.script_src ||= [
-          :unsafe_inline,
-          :unsafe_eval,
-          :strict_dynamic,
-          :https,
-          :http
+        self.script_src ||= %i[
+          unsafe_inline
+          unsafe_eval
+          strict_dynamic
+          https
+          http
         ]
         self.connect_src ||= [
           'https://api.intercom.io',
