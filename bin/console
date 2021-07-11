@@ -1,7 +1,16 @@
 #!/usr/bin/env ruby
 
-require "bundler/setup"
-require "csp/builder"
+require 'bundler/setup'
+require 'active_model'
+require 'action_dispatch'
+require 'content_security_policy'
+require 'active_support/core_ext/object/instance_variables'
+require 'active_support/core_ext/array/wrap'
+require 'active_support/core_ext/string/inquiry'
+
+module Rails
+  mattr_accessor :env, default: 'development'.inquiry
+end
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
@@ -10,5 +19,5 @@ require "csp/builder"
 # require "pry"
 # Pry.start
 
-require "irb"
+require 'irb'
 IRB.start(__FILE__)

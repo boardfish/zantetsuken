@@ -10,7 +10,7 @@ module ContentSecurityPolicy
       include ActiveModel::AttributeAssignment
 
       attr_accessor :base_uri, :default_src, :font_src, :img_src, :object_src, :script_src, :frame_src, :connect_src,
-                    :style_src, :report_uri
+                    :style_src, :child_src, :form_action, :media_src, :report_uri
 
       def initialize(**attributes)
         assign_attributes(attributes)
