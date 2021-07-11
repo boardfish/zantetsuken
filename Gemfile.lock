@@ -34,6 +34,8 @@ GEM
     crass (1.0.6)
     diff-lcs (1.4.4)
     erubi (1.10.0)
+    faker (2.18.0)
+      i18n (>= 1.6, < 2)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     loofah (2.10.0)
@@ -76,6 +78,7 @@ PLATFORMS
 
 DEPENDENCIES
   csp-builder!
+  faker
   rake (~> 12.0)
   rspec (~> 3.0)
 

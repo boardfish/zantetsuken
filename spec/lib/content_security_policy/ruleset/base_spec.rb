@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require 'content_security_policy'
+require 'faker'
 
 RSpec.describe ContentSecurityPolicy::Ruleset::Base do
   let(:base_ruleset) { described_class.new(**existing_rules) }
