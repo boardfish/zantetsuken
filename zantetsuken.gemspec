@@ -29,6 +29,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'actionpack', '~> 6.1.4', '>= 6.0.0'
   spec.add_runtime_dependency 'activemodel', '~> 6.1.4', '>= 6.0.0'
+  spec.add_development_dependency 'byebug'
   spec.add_development_dependency 'faker'
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'rubocop'

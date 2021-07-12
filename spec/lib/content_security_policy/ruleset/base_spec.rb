@@ -2,75 +2,45 @@
 
 require 'zantetsuken'
 require 'faker'
+require_relative '../../../support/mock_ruleset'
+require_relative '../../../support/mock_ruleset_2'
 
 RSpec.describe Zantetsuken::Ruleset::Base do
-  let(:base_ruleset) { described_class.new(**existing_rules) }
+  let(:base_ruleset) { MockRuleset.new }
   let(:existing_rules) { {} }
-  let(:new_rules) do
-    {
-      base_uri: Faker::Internet.url,
-      default_src: Faker::Internet.url,
-      font_src: Faker::Internet.url,
-      img_src: Faker::Internet.url,
-      object_src: Faker::Internet.url,
-      script_src: Faker::Internet.url,
-      frame_src: Faker::Internet.url,
-      connect_src: Faker::Internet.url,
-      style_src: Faker::Internet.url
-    }
-  end
 
   describe '#new' do
     subject { base_ruleset }
 
-    context 'when no rules are passed' do
-      it { is_expected.to have_attributes existing_rules }
-    end
-
-    context 'when rules are passed' do
-      let(:existing_rules) { new_rules }
-
-      it { is_expected.to have_attributes new_rules }
-    end
+    it {
+      is_expected.to have_attributes({
+                                       base_uri: :self,
+                                       default_src: [:self, :https, :unsafe_eval, 'http://example.com'],
+                                       img_src: [:self, :https, :data, 'http://example.com'],
+                                       object_src: :none,
+                                       script_src: [:strict_dynamic, :self, :https, :unsafe_inline, 'http://example.com'],
+                                       frame_src: 'http://example.com',
+                                       connect_src: [:self, :https, 'http://example.com'],
+                                       style_src: %i[self https unsafe_inline]
+                                     })
+    }
   end
 
   describe '#add' do
-    subject { base_ruleset.add(new_rules) }
+    subject { base_ruleset.add(new_ruleset) }
+
+    let(:new_ruleset) { MockRulesetAdd2.new }
 
     it { is_expected.to be_a described_class }
 
     context 'when no rules already exist' do
-      it { is_expected.to have_attributes new_rules }
+      let(:base_ruleset) { described_class.new }
+
+      it { is_expected.to have_attributes new_ruleset.instance_values }
     end
 
     context 'when rules already exist' do
-      let(:existing_rules) do
-        {
-          base_uri: 'ruleset 1', # copes with a singular attribute
-          default_src: ['ruleset 1:1', 'ruleset 1:2'],
-          font_src: nil, # copes with a nil/empty attribute
-          img_src: ['ruleset 1:1', 'ruleset 1:2'],
-          object_src: ['ruleset 1:1', 'ruleset 1:2'],
-          script_src: ['ruleset 1:1', 'ruleset 1:2'],
-          frame_src: ['ruleset 1:1', 'ruleset 1:2'],
-          connect_src: ['ruleset 1:1', 'ruleset 1:2'],
-          style_src: ['ruleset 1:1', 'ruleset 1:2']
-        }
-      end
-
-      let(:new_rules) do
-        {
-          base_uri: 'ruleset 2',
-          default_src: ['ruleset 2:1', 'ruleset 2:2'],
-          font_src: ['ruleset 2:1', 'ruleset 2:2'],
-          img_src: ['ruleset 2:1', 'ruleset 2:2'],
-          object_src: ['ruleset 2:1', 'ruleset 2:2'],
-          script_src: ['ruleset 2:1', 'ruleset 2:2'],
-          frame_src: ['ruleset 2:1', 'ruleset 2:2'],
-          connect_src: ['ruleset 2:1', 'ruleset 2:2'],
-          style_src: ['ruleset 2:1', 'ruleset 2:2']
-        }
-      end
+      let(:base_ruleset) { MockRulesetAdd1.new }
 
       let(:target_ruleset_contents) do
         {
@@ -95,20 +65,6 @@ RSpec.describe Zantetsuken::Ruleset::Base do
       ActionDispatch::ContentSecurityPolicy.new do |policy|
         base_ruleset.to_actiondispatch_csp(policy)
       end.instance_variable_get(:@directives)
-    end
-
-    let(:existing_rules) do
-      {
-        base_uri: :self,
-        default_src: [:self, :https, :unsafe_eval, 'http://example.com'],
-        font_src: %i[self https data], # copes with a nil/empty attribute
-        img_src: [:self, :https, :data, 'http://example.com'],
-        object_src: :none,
-        script_src: [:strict_dynamic, :self, :https, :unsafe_inline, 'http://example.com'],
-        frame_src: 'http://example.com',
-        connect_src: [:self, :https, 'http://example.com'],
-        style_src: %i[self https unsafe_inline]
-      }
     end
 
     let(:expectation) do

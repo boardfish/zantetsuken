@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    csp-builder (0.1.0)
+    zantetsuken (0.1.0)
       actionpack (~> 6.1.4, >= 6.0.0)
       activemodel (~> 6.1.4, >= 6.0.0)
 
@@ -31,6 +31,7 @@ GEM
       zeitwerk (~> 2.3)
     ast (2.4.2)
     builder (3.2.4)
+    byebug (11.1.3)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
     diff-lcs (1.4.4)
@@ -97,11 +98,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  csp-builder!
+  byebug
   faker
   rake (~> 12.0)
   rspec (~> 3.0)
   rubocop
+  zantetsuken!
 
 BUNDLED WITH
    2.1.4

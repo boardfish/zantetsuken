@@ -40,11 +40,10 @@ module Zantetsuken
     module Stripe
       # Used for loading Stripe's JS library.
       class Js < Base
-        def initialize(**attributes)
-          super
-          self.connect_src ||= 'https://api.stripe.com'
-          self.frame_src   ||= ['https://js.stripe.com', 'https://hooks.stripe.com']
-          self.script_src  ||= 'https://js.stripe.com'
+        ruleset do
+          self.connect_src = 'https://api.stripe.com'
+          self.frame_src   = 'https://js.stripe.com', 'https://hooks.stripe.com'
+          self.script_src  = 'https://js.stripe.com'
         end
       end
     end
@@ -52,11 +51,8 @@ module Zantetsuken
 end
 ```
 
-You should:
-
-- call `super` first to initialize the parent state
-- inherit from `Zantetsuken::Ruleset::Base` so that the
-  ruleset can be composed with others.
+You should inherit from `Zantetsuken::Ruleset::Base` so that the ruleset can be
+composed with others.
 
 ## Contributing
 

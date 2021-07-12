@@ -8,12 +8,23 @@ module Zantetsuken
     # ActionDispatch::ContentSecurityPolicy.
     class Base
       include ActiveModel::AttributeAssignment
+      extend ActiveModel::Callbacks
+
+      define_model_callbacks :initialize
 
       attr_accessor :base_uri, :default_src, :font_src, :img_src, :object_src, :script_src, :frame_src, :connect_src,
                     :style_src, :child_src, :form_action, :media_src, :report_uri
 
+      class << self
+        def ruleset(&block)
+          after_initialize(&block)
+        end
+      end
+
       def initialize(**attributes)
-        assign_attributes(attributes)
+        run_callbacks :initialize do
+          assign_attributes(attributes)
+        end
       end
 
       def add(ruleset)
