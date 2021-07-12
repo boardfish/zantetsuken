@@ -15,6 +15,7 @@ Update `config/initializer/content_security_policy` to include the
 following:
 
 ```ruby
+Dir[Rails.root.join('app/lib/zantetsuken/**/*.rb').to_s].sort.each { |file| require file }
 Rails.application.config.content_security_policy do |policy|
   Zantetsuken.load(policy)
 end
