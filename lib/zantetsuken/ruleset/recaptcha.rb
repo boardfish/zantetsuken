@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ContentSecurityPolicy
+module Zantetsuken
   module Ruleset
     # For verification that our users aren't bots.
     class Recaptcha < Base

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ContentSecurityPolicy
+module Zantetsuken
   module Ruleset
     # Supports Adobe's Document Cloud PDF Embed API.
     class AdobeDocumentCloud

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ContentSecurityPolicy
+module Zantetsuken
   module Ruleset
     module Stripe
       # Supports Stripe's Checkout feature.

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'content_security_policy'
+require 'zantetsuken'
 require 'faker'
 
-RSpec.describe ContentSecurityPolicy::Ruleset::Base do
+RSpec.describe Zantetsuken::Ruleset::Base do
   let(:base_ruleset) { described_class.new(**existing_rules) }
   let(:existing_rules) { {} }
   let(:new_rules) do

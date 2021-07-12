@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ContentSecurityPolicy
+module Zantetsuken
   # A set of rules that comprises a Content Security Policy.
   module Ruleset
     # Base class for rulesets. Defines the rules to be applied and the behavior

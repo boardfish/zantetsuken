@@ -16,26 +16,26 @@ following:
 
 ```ruby
 Rails.application.config.content_security_policy do |policy|
-  ContentSecurityPolicy.load(policy)
+  Zantetsuken.load(policy)
 end
 ```
 
 This will compose any rulesets you've defined under the
-`ContentSecurityPolicy::Ruleset` module into a single
+`Zantetsuken::Ruleset` module into a single
 `ActionDispatch::ContentSecurityPolicy`, which is what Rails uses under
 the hood to build your CSP.
 
 ### Defining rulesets
 
 You should define your rulesets under
-`app/lib/content_security_policy/ruleset`. Here's an example:
+`app/lib/zantetsuken/ruleset`. Here's an example:
 
 ```ruby
-# app/lib/content_security_policy/ruleset/stripe/js.rb
+# app/lib/zantetsuken/ruleset/stripe/js.rb
 
 # frozen_string_literal: true
 
-module ContentSecurityPolicy
+module Zantetsuken
   module Ruleset
     module Stripe
       # Used for loading Stripe's JS library.
@@ -55,7 +55,7 @@ end
 You should:
 
 - call `super` first to initialize the parent state
-- inherit from `ContentSecurityPolicy::Ruleset::Base` so that the
+- inherit from `Zantetsuken::Ruleset::Base` so that the
   ruleset can be composed with others.
 
 ## Contributing

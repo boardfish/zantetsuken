@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ContentSecurityPolicy
+module Zantetsuken
   module Ruleset
     # Used to drive analytics, including for example pageviews, via Google.
     class GoogleAnalytics < Base

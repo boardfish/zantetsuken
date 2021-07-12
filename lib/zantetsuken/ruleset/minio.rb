@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ContentSecurityPolicy
+module Zantetsuken
   module Ruleset
     # A locally-hosted S3 server. Serves uploaded assets.
     class Minio < Base

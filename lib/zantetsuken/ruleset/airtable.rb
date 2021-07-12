@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ContentSecurityPolicy
+module Zantetsuken
   module Ruleset
     # Displays forms that go straight to an internal database with a UI.
     class Airtable < Base

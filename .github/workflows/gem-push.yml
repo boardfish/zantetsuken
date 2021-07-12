@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'lib/content_security_policy/version.rb'
+      - 'lib/zantetsuken/version.rb'
 
 jobs:
   build:

@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
-require_relative 'lib/content_security_policy/version'
+require_relative 'lib/zantetsuken/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'csp-builder'
-  spec.version       = ContentSecurityPolicy::VERSION
+  spec.name          = 'zantetsuken'
+  spec.version       = Zantetsuken::VERSION
   spec.authors       = ['Simon Fish']
   spec.email         = ['si@mon.fish']
 
   spec.summary       = "Organize and build your app's Content Security Policy"
-  spec.description   = 'The Content Security Policy (CSP) in Rails can get cluttered fast. Break it down with this gem.'
-  spec.homepage      = 'https://github.com/raisedevs/csp-builder'
+  spec.description   = 'The Content Security Policy (CSP) in Rails can get big fast. Slice it up with this gem.'
+  spec.homepage      = 'https://github.com/raisedevs/zantetsuken'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.5.0')
 
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = 'https://github.com/raisedevs/csp-builder'
-  spec.metadata['changelog_uri'] = 'https://github.com/raisedevs/csp-builder/blob/main/CHANGELOG.md'
+  spec.metadata['source_code_uri'] = 'https://github.com/raisedevs/zantetsuken'
+  spec.metadata['changelog_uri'] = 'https://github.com/raisedevs/zantetsuken/blob/main/CHANGELOG.md'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
