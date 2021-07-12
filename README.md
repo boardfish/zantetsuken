@@ -1,13 +1,13 @@
-# Content Security Policy Builder
+# Zantetsuken
 
 The Content Security Policy (CSP) initializer in Rails can get cluttered
 fast. Break it down with the help of this gem.
 
 ## Installation
 
-Add `gem 'csp-builder'` to your Gemfile and run `bundle install`.
+Add `gem 'zantetsuken'` to your Gemfile and run `bundle install`.
 Alternatively, install the gem directly by calling `gem install
-csp-builder` in your shell.
+zantetsuken` in your shell.
 
 ## Usage
 
