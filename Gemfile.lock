@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     zantetsuken (0.1.0)
-      actionpack (~> 6.1.4, >= 6.0.0)
-      activemodel (~> 6.1.4, >= 6.0.0)
+      actionpack (>= 6.0.0)
+      activemodel (>= 6.0.0)
 
 GEM
   remote: https://rubygems.org/
